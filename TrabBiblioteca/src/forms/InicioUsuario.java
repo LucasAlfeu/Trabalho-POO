@@ -155,7 +155,6 @@ public class InicioUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSugestaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSugestaoActionPerformed
-        // TODO add your handling code here:
         AdicionarSugestao frc = new AdicionarSugestao();
         frc.setVisible(true);
     }//GEN-LAST:event_btnSugestaoActionPerformed

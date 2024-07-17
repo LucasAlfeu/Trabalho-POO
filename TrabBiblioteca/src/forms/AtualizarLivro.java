@@ -164,7 +164,6 @@ public class AtualizarLivro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        // TODO add your handling code here:
         int id = Integer.parseInt(txtId.getText());
         String titulo = txtTitulo.getText();
         String autor = txtAutor.getText();
@@ -193,7 +192,6 @@ public class AtualizarLivro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
         int id = Integer.parseInt(txtId.getText());
         LivroDAO livroDAO = new LivroDAO();
         Livro livro = livroDAO.getLivro(id);

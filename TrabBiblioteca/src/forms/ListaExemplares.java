@@ -124,7 +124,6 @@ public class ListaExemplares extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTituloCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTituloCaretUpdate
-        // TODO add your handling code here:
         tabelaExemplares();
     }//GEN-LAST:event_txtTituloCaretUpdate
 

@@ -152,7 +152,6 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscaActionPerformed
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
-        // TODO add your handling code here:
         preencheTabela();
     }//GEN-LAST:event_btnBuscaActionPerformed
 
