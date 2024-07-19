@@ -19,8 +19,17 @@ public class Emprestimo {
     private List<Exemplar> lista = new ArrayList<>();
     private String idExemplar;
     private String idUsuario;
-    
 
+    public Emprestimo(int idEmprestimo, Date dataEmprestimo, Date dataDevolucao, String idExemplar, String idUsuario) {
+        this.idEmprestimo = idEmprestimo;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataDevolucao = dataDevolucao;
+        this.idExemplar = idExemplar;
+        this.idUsuario = idUsuario;
+    }
+    
+    public Emprestimo(){
+    }
     public Date getDataEmprestimo() {
         return dataEmprestimo;
     }

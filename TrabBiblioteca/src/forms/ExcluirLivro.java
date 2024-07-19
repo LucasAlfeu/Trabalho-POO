@@ -4,7 +4,6 @@
  */
 package forms;
 
-import beans.Exemplar;
 import beans.Livro;
 import dao.ExemplarDAO;
 import dao.LivroDAO;
@@ -123,7 +122,6 @@ public class ExcluirLivro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
         int id = Integer.parseInt(txtId.getText());
         LivroDAO livroDAO = new LivroDAO();
         livroDAO.excluirLivro(id);
@@ -131,7 +129,6 @@ public class ExcluirLivro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirExemplarActionPerformed
-        // TODO add your handling code here:
         Livro livroTitulo = (Livro) cmbLivros.getSelectedItem();
         ExemplarDAO exemplarDAO = new ExemplarDAO();
         exemplarDAO.excluirExemplar(livroTitulo.getTitulo());

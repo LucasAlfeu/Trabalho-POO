@@ -1,3 +1,9 @@
+
+import beans.Espera;
+import dao.ListaEsperaDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,12 +14,32 @@
  * @author a1feu
  */
 public class VisualizarListaEspera extends javax.swing.JFrame {
-
+    
+    private void tabelaListaDeEspera(){
+        ListaEsperaDAO leDAO = new ListaEsperaDAO();
+        String busca = txtLivroEspera.getText();
+        
+        List<Espera> listaNaEspera = leDAO.getListaEspera(busca);
+        
+        DefaultTableModel tabelaListaEspera = (DefaultTableModel) tblListaEspera.getModel();
+        tabelaListaEspera.setNumRows(0);
+        
+        for(Espera e: listaNaEspera){
+            Object[] obj = new Object[]{
+                e.getTitulo(),
+                e.getIsbn(),
+                e.getUsuario()
+            };
+            tabelaListaEspera.addRow(obj);
+        }
+        
+    }
     /**
      * Creates new form VisualizarListaEspera
      */
     public VisualizarListaEspera() {
         initComponents();
+        tabelaListaDeEspera();
     }
 
     /**
@@ -27,9 +53,9 @@ public class VisualizarListaEspera extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblListaEspera = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtLivroEspera = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema Gerenciador da Biblioteca - Lista de Espera");
@@ -37,22 +63,27 @@ public class VisualizarListaEspera extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 23)); // NOI18N
         jLabel1.setText("Lista de Espera");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblListaEspera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Usuário"
+                "Título", "ISBN", "Usuário"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblListaEspera);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Livro:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtLivroEspera.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtLivroEsperaCaretUpdate(evt);
+            }
+        });
+        txtLivroEspera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtLivroEsperaActionPerformed(evt);
             }
         });
 
@@ -61,16 +92,20 @@ public class VisualizarListaEspera extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(99, 99, 99))
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLivroEspera, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,19 +115,22 @@ public class VisualizarListaEspera extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addComponent(txtLivroEspera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void txtLivroEsperaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLivroEsperaActionPerformed
+    }//GEN-LAST:event_txtLivroEsperaActionPerformed
+
+    private void txtLivroEsperaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtLivroEsperaCaretUpdate
+        tabelaListaDeEspera();
+    }//GEN-LAST:event_txtLivroEsperaCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -133,7 +171,7 @@ public class VisualizarListaEspera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblListaEspera;
+    private javax.swing.JTextField txtLivroEspera;
     // End of variables declaration//GEN-END:variables
 }

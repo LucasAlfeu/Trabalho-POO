@@ -230,13 +230,11 @@ public class CadastroLivro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         AtualizarLivro frc = new AtualizarLivro();
         frc.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCadastrarExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarExemplaresActionPerformed
-        // TODO add your handling code here:
         Livro livroid = (Livro) cmbLivros.getSelectedItem();
         
         Exemplar exemplar = new Exemplar(livroid,livroid,"Disponível",livroid);

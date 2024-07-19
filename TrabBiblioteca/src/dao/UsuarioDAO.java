@@ -9,7 +9,7 @@ import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import javax.swing.JOptionPane;
+import java.sql.SQLException;
 
 /**
  *
@@ -38,7 +38,7 @@ public class UsuarioDAO {
             stmt.setString(6, usuario.getTipoDeUsuario());
             
             stmt.execute();
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println("Erro ao inserir Usuario: " + e.getMessage());
         }
     } 
@@ -61,7 +61,7 @@ public class UsuarioDAO {
                 return usuario;
             }*/
             return aux;
-        } catch (Exception e){
+        } catch (SQLException e){
             System.out.println(e.getMessage());
             return "diferente";
         }
@@ -90,7 +90,7 @@ public class UsuarioDAO {
             }
             
             return user;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -118,7 +118,7 @@ public class UsuarioDAO {
                 }
 
                 return user;
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 return null;
             }
@@ -140,7 +140,7 @@ public class UsuarioDAO {
                     return false;
                 }               
                 
-            } catch (Exception e){
+            } catch (SQLException e){
                 System.out.println(e.getMessage());
                 return false;
             }
@@ -158,7 +158,7 @@ public class UsuarioDAO {
                 stmt.setString(5, System.getProperty("matricula"));
                 
                 stmt.execute();
-            } catch (Exception e){
+            } catch (SQLException e){
                 System.out.println(e.getMessage());
             }
         }

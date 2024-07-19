@@ -127,8 +127,6 @@ public class CadastroLivros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
-        
         //Pegar os elementos que foram escritos no formulário
         String titulo = txtTitulo.getText();
         String autor = txtAutor.getText();

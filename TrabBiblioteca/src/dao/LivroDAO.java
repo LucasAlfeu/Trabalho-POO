@@ -4,7 +4,6 @@
  */
 package dao;
 
-import beans.Exemplar;
 import beans.Livro;
 import conexao.Conexao;
 import java.sql.Connection;
@@ -44,7 +43,7 @@ public class LivroDAO{
             
            
         }
-        catch (Exception e){
+        catch (SQLException e){
             System.out.println("Erro ao inserir livro: " + e.getMessage());
         }
     }
@@ -57,7 +56,7 @@ public class LivroDAO{
             stmt.execute();
             
         }
-        catch (Exception e){
+        catch (SQLException e){
             System.out.println("Error ao remover livro: "+ e.getMessage());
         }
     }
@@ -80,7 +79,7 @@ public class LivroDAO{
             return livro;
             
         }
-        catch (Exception e){
+        catch (SQLException e){
             System.out.println("Erro ao recuperar o livro: "+ e.getMessage());
             return null;
         }
@@ -126,7 +125,7 @@ public class LivroDAO{
             }
             return listaLivros;
         }
-        catch (Exception e){
+        catch (SQLException e){
             return null;
         }
     }
@@ -141,7 +140,7 @@ public class LivroDAO{
             stmt.setString(2, livro.getAutor());
             stmt.execute();
         }
-        catch(Exception e){
+        catch(SQLException e){
             System.out.println("Erro ao adicionar sugestão: "+ e.getMessage());
         }
     }

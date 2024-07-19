@@ -6,7 +6,6 @@ package forms;
 
 import beans.Usuario;
 import dao.UsuarioDAO;
-import forms.Confirmacao;
 import javax.swing.JOptionPane;
 
 /**

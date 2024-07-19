@@ -13,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -43,7 +41,7 @@ public class ExemplarDAO {
                 count -= 1;
             }
         }
-        catch (Exception e){
+        catch (SQLException e){
             System.out.println("Erro ao cadastrar exemplar: "+e.getMessage());
         }
     }
@@ -74,7 +72,7 @@ public class ExemplarDAO {
             }
             return listaExemplares;
         }
-        catch (Exception e){
+        catch (SQLException e){
             System.out.println("Erro ao listar exemplares: "+e.getMessage());
             return null;
         }
@@ -89,7 +87,7 @@ public class ExemplarDAO {
             stmt.setString(1, titulo);
             stmt.execute();
         }
-        catch (Exception e){
+        catch (SQLException e){
             System.out.println("Error ao remover exemplar: "+ e.getMessage());
         }
     }
