@@ -19,6 +19,7 @@ public class DeletaUsuario extends javax.swing.JFrame {
      */
     public DeletaUsuario() {
         initComponents();
+        System.out.println(System.getProperty("matricula"));
     }
 
     /**

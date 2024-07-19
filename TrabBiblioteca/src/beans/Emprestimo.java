@@ -4,50 +4,78 @@
  */
 package beans;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
- *
+ * !!!!! ATENÇÃO !!!!!!
+ * Foi necessário fazer mudanças no banco de dados
+ * 
  * @author Usuario
  */
 public class Emprestimo {
     private int idEmprestimo;
-    private Date dataEmprestimo;
-    private Date dataDevolucao;
+    private LocalDate dataEmprestimo;
+    private LocalDate dataDevolucao;
     private List<Exemplar> lista = new ArrayList<>();
-    private String idExemplar;
-    private String idUsuario;
+    private Exemplar idExemplar;
+    private Usuario idUsuario;
+    
+    public static final String DATE_FORMAT_NOW = "dd-MM-yyyy";
+    
+    public Emprestimo(){
+        LocalDate hoje = LocalDate.now();
+        this.dataEmprestimo = hoje;
+        this.dataDevolucao = hoje.plusDays(30);
+    }
 
-    public Emprestimo(int idEmprestimo, Date dataEmprestimo, Date dataDevolucao, String idExemplar, String idUsuario) {
+    public int getIdEmprestimo() {
+        return idEmprestimo;
+    }
+
+    public void setIdEmprestimo(int idEmprestimo) {
         this.idEmprestimo = idEmprestimo;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
+    }
+
+    public Exemplar getIdExemplar() {
+        return idExemplar;
+    }
+
+    public void setIdExemplar(Exemplar idExemplar) {
         this.idExemplar = idExemplar;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
     
-    public Emprestimo(){
-    }
-    public Date getDataEmprestimo() {
-        return dataEmprestimo;
-    }
-
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
     public List<Exemplar> getLista() {
         return lista;
     }
-    public void setDataEmprestimo(Date dataEmprestimo) {
+
+    public LocalDate getDataEmprestimo() {
+        
+        return dataEmprestimo;
+    }
+
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+    
 
     public void setLista(List<Exemplar> lista) {
         this.lista = lista;

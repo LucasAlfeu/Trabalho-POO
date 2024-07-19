@@ -27,8 +27,16 @@ public class Usuario {
         this.password = password;
         this.matricula = matricula;
         this.tipoDeUsuario = tipoDeUsuario;
-        this.matricula = matricula;
     }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public String getMatricula() {
         return matricula;
     }
@@ -36,7 +44,7 @@ public class Usuario {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
-
+    
     public String getTipoDeUsuario() {
         return tipoDeUsuario;
     }

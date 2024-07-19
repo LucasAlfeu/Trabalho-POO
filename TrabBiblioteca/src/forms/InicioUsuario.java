@@ -11,12 +11,20 @@ import forms.AdicionarSugestao;
  * @author a1feu
  */
 public class InicioUsuario extends javax.swing.JFrame {
+    String nome = System.getProperty("nome");
+    String email = System.getProperty("email");
+    String login = System.getProperty("login");
+    String senha = System.getProperty("senha");
+    String matricula = System.getProperty("matricula");
+    String tipoUsuario = System.getProperty("tipoUsuario");
 
     /**
      * Creates new form InicioUsuario
      */
     public InicioUsuario() {
         initComponents();
+        jlNome.setText(nome);
+        jlTipoUsuario.setText(tipoUsuario);
     }
 
     /**
@@ -37,8 +45,8 @@ public class InicioUsuario extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jlNome = new javax.swing.JLabel();
+        jlTipoUsuario = new javax.swing.JLabel();
         btnSugestao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,12 +80,17 @@ public class InicioUsuario extends javax.swing.JFrame {
         jButton3.setText("Sair");
 
         jButton4.setText("Menu");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Seja bem vindo, ");
 
-        jLabel3.setText("nome do usuário");
+        jlNome.setText("nome do usuário");
 
-        jLabel4.setText("Tipo de Usuário");
+        jlTipoUsuario.setText("Tipo de Usuário");
 
         btnSugestao.setText("Sugestão");
         btnSugestao.addActionListener(new java.awt.event.ActionListener() {
@@ -99,10 +112,10 @@ public class InicioUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlTipoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(jlNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSugestao)
                 .addGap(32, 32, 32)
@@ -130,10 +143,10 @@ public class InicioUsuario extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
+                    .addComponent(jlNome)
                     .addComponent(btnSugestao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(jlTipoUsuario)
                 .addGap(112, 112, 112)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -148,6 +161,7 @@ public class InicioUsuario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -158,6 +172,11 @@ public class InicioUsuario extends javax.swing.JFrame {
         AdicionarSugestao frc = new AdicionarSugestao();
         frc.setVisible(true);
     }//GEN-LAST:event_btnSugestaoActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        MenuBibliotecario menu = new MenuBibliotecario();
+        menu.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,10 +221,10 @@ public class InicioUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jlNome;
+    private javax.swing.JLabel jlTipoUsuario;
     // End of variables declaration//GEN-END:variables
 }

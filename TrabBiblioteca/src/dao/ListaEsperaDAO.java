@@ -28,7 +28,7 @@ public class ListaEsperaDAO {
     }
 
     public void adicionarLivroNaLista(Espera le) {
-        String sql = "INSERT INTO listaespera(titulo,isbn,usuario) VALUES(?,?,?)";
+        String sql = "INSERT INTO listaespera(titulo,isbn,idUsuario) VALUES(?,?,?)";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, le.getTitulo());
@@ -36,7 +36,7 @@ public class ListaEsperaDAO {
             stmt.setInt(3, le.getUsuario());
             stmt.execute();
         } catch (SQLException e) {
-            System.out.println("Erro ao adicionar livro na lista de espera.");
+            System.out.println("Erro ao adicionar livro na lista de espera. " + e.getMessage());
         }
      
     }
