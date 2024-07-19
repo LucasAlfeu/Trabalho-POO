@@ -131,9 +131,9 @@ public class ListaEspera extends javax.swing.JFrame {
         ListaEsperaDAO leDAO = new ListaEsperaDAO();
         leDAO.adicionarLivroNaLista(le);
         
-        txtTitulo.setText("");
-        jsIsbn.setValue(0);
-        jsUsuario.setValue(0);
+        //txtTitulo.setText("");
+        //jsIsbn.setValue(0);
+        //jsUsuario.setValue(0);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**

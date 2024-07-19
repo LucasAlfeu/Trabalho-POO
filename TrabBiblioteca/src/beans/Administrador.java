@@ -16,6 +16,6 @@ public class Administrador extends Usuario{
 
 
     public Administrador(String nome, String email, String login, String password, String tipoDeUsuario, String matricula) {
-        super(nome, email, login, password, tipoDeUsuario, matricula);
+        super(nome, email, login, password, matricula, tipoDeUsuario);
     }
 }

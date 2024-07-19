@@ -108,6 +108,7 @@ public class UsuarioDAO {
 
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
+                    user.setIdUsuario((rs.getInt("idusuario")));
                     user.setNome(rs.getString("nome"));
                     user.setEmail(rs.getString("email"));
                     user.setLogin(rs.getString("login"));

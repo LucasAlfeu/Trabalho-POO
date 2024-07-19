@@ -1,18 +1,30 @@
+
+import beans.Emprestimo;
+import beans.Usuario;
+import dao.EmprestimoDAO;
+import dao.UsuarioDAO;
+import javax.swing.JOptionPane;
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
 /**
- *
+ * !!!!!! ATENÇÃO !!!!!!
+ * Foi necessário fazer mudanças no banco de dados
+ * Os tipos de dataDevolucao e dataEmprestimos foram alterados de Date para varChar(10)
+ * !!!!!! ATENÇÃO !!!!!!!
  * @author a1feu
  */
-public class Emprestimo extends javax.swing.JFrame {
+public class TelaEmprestimo extends javax.swing.JFrame {
 
     /**
      * Creates new form Emprestimo
      */
-    public Emprestimo() {
+    public TelaEmprestimo() {
         initComponents();
     }
 
@@ -27,10 +39,10 @@ public class Emprestimo extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtIdExemplar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtIdentificacao = new javax.swing.JTextField();
+        btnConfirmar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -40,18 +52,18 @@ public class Emprestimo extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Número do Exemplar:");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtIdExemplar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("Usuário:");
+        jLabel3.setText("Identificação");
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtIdentificacao.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
 
@@ -68,13 +80,13 @@ public class Emprestimo extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(79, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnConfirmar)
                 .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
@@ -85,13 +97,13 @@ public class Emprestimo extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(jButton1)
+                .addComponent(btnConfirmar)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -99,9 +111,30 @@ public class Emprestimo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        int idExemplar = Integer.parseInt(txtIdExemplar.getText());
+        String idUsuario = txtIdentificacao.getText();
+        
+        UsuarioDAO userDAO = new UsuarioDAO();
+        Usuario user = userDAO.procuraUsuario(idUsuario);
+        
+        EmprestimoDAO empDAO = new EmprestimoDAO();
+        
+        if(txtIdExemplar.equals("") || txtIdentificacao.equals("")){
+            boolean foiEmprestado = empDAO.fazerDevolucao(user, idExemplar);
+                if(foiEmprestado){
+                    JOptionPane.showMessageDialog(this, "Empréstimo feito com sucesso.");
+                    txtIdExemplar.setText("");
+                    txtIdentificacao.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Empréstimo mal sucedida. Revise os dados");           
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Existem campos em branco. Revise os dados");
+        }
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,30 +153,31 @@ public class Emprestimo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Emprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Emprestimo().setVisible(true);
+                new TelaEmprestimo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnConfirmar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtIdExemplar;
+    private javax.swing.JTextField txtIdentificacao;
     // End of variables declaration//GEN-END:variables
 }
