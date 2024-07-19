@@ -92,6 +92,41 @@ public class ExemplarDAO {
         }
     }
     
+    public int encontraIsbn(int idExemplar){
+        String sql = "SELECT isbn FROM exemplares WHERE idexemplares = ?";
+        int isbn = 0;
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1, idExemplar);
+            
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                isbn = rs.getInt("isbn");
+            }
+            
+            return isbn;
+        } catch (Exception e){
+            System.out.println("Não foi possível diminuir o número de exemplares disponíveis. "+e.getMessage());
+            return 0;
+        }        
+    }
     
+    public void mudaEstadoExemplar(int idExemplar, String processo){
+        String sql = "UPDATE exemplares SET estado = ? WHERE idexemplares = ?";
+        
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            if(processo.equals("Emprestimo")){
+                stmt.setString(1, "Indisponível");
+            } else {
+                stmt.setString(1, "Disponível");
+            }
+            stmt.setInt(2, idExemplar);
+            
+            stmt.execute();
+        } catch (Exception e){
+            System.out.println("impossível mudar o estado do exemplar. " + e.getMessage());
+        }
+    }
     
 }

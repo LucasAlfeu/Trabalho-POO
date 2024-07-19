@@ -1,5 +1,7 @@
 
-import beans.Emprestimo;
+
+package forms;
+
 import beans.Usuario;
 import dao.EmprestimoDAO;
 import dao.UsuarioDAO;
