@@ -45,24 +45,26 @@ public class EmprestimoDAO {
     }
     
     public void diminuirNumeroDeExemplares(int isbn){
-        String sql = "UPDATE livros SET numeroexemplares = numeroexemplares - 1 WHERE isbn = ? AND numeroexemplares>0";
+        String sql = "UPDATE livros SET numeroexemplares=numeroexemplares-1 WHERE id = ? AND numeroexemplares > 0";
         
         try{
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setInt(1, isbn);
+            stmt.execute();
         } catch (Exception e){
-            System.out.println("Não foi possivel atualizar o número de livros");
+            System.out.println("Não foi possivel aumentar o número de livros. "+e.getMessage());
         }
     }
     
     public void aumentarNumeroDeExemplares(int isbn){
-        String sql = "UPDATE livros SET numeroexemplares = numeroexemplares + 1 WHERE isbn = ?";
+        String sql = "UPDATE livros SET numeroexemplares = numeroexemplares + 1 WHERE id = ?";
         
         try{
             PreparedStatement stmt = this.conn.prepareStatement(sql);
             stmt.setInt(1, isbn);
+            stmt.execute();
         } catch (Exception e){
-            System.out.println("Não foi possivel atualizar o número de livros");
+            System.out.println("Não foi possivel diminuir o número de livros. "+e.getMessage());
         }
     }
     
@@ -89,7 +91,6 @@ public class EmprestimoDAO {
         Exemplar exemplar = new Exemplar();
         Emprestimo emp = new Emprestimo();
         int isbn = encontraIsbn(idExemplar);
-        
         
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -143,7 +144,7 @@ public class EmprestimoDAO {
             stmt.execute();
             
             this.mudaEstadoExemplar(idExemplar, "Devolucao");
-            //aumentarNumeroDeExemplares(isbn);
+            aumentarNumeroDeExemplares(isbn);
         } catch (Exception e){
             System.out.println("Não foi possível fazer a devolução. "+e.getMessage());
         }
