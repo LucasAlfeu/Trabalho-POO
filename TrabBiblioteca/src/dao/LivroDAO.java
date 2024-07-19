@@ -145,5 +145,29 @@ public class LivroDAO{
         }
     }
     
+    public void diminuirNumeroDeExemplares(int isbn){
+        String sql = "UPDATE livros SET numeroexemplares=numeroexemplares-1 WHERE id = ? AND numeroexemplares > 0";
+        
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1, isbn);
+            stmt.execute();
+        } catch (Exception e){
+            System.out.println("Não foi possivel aumentar o número de livros. "+e.getMessage());
+        }
+    }
+    
+    public void aumentarNumeroDeExemplares(int isbn){
+        String sql = "UPDATE livros SET numeroexemplares = numeroexemplares + 1 WHERE id = ?";
+        
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1, isbn);
+            stmt.execute();
+        } catch (Exception e){
+            System.out.println("Não foi possivel diminuir o número de livros. "+e.getMessage());
+        }
+    }
+    
     
 }
