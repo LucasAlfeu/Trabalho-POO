@@ -3,6 +3,7 @@ import beans.Emprestimo;
 import beans.Usuario;
 import dao.EmprestimoDAO;
 import dao.UsuarioDAO;
+import javax.swing.JOptionPane;
 
 
 
@@ -119,7 +120,19 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         
         EmprestimoDAO empDAO = new EmprestimoDAO();
         
-        empDAO.fazerEmprestimo(user, idExemplar);
+        if(txtIdExemplar.equals("") || txtIdentificacao.equals("")){
+            boolean foiEmprestado = empDAO.fazerDevolucao(user, idExemplar);
+                if(foiEmprestado){
+                    JOptionPane.showMessageDialog(this, "Empréstimo feito com sucesso.");
+                    txtIdExemplar.setText("");
+                    txtIdentificacao.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Empréstimo mal sucedida. Revise os dados");           
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Existem campos em branco. Revise os dados");
+        }
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 

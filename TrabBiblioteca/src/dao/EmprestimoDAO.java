@@ -86,7 +86,7 @@ public class EmprestimoDAO {
         }
     }
     
-    public void fazerEmprestimo(Usuario user, int idExemplar){
+    public boolean fazerEmprestimo(Usuario user, int idExemplar){
         String sql = "INSERT INTO emprestimo(matricula, dataEmprestimo, dataDevolucao, estado, idUsuario, idExemplar) values (?,?,?,?,?,?)";
         Exemplar exemplar = new Exemplar();
         Emprestimo emp = new Emprestimo();
@@ -105,10 +105,11 @@ public class EmprestimoDAO {
             
             this.mudaEstadoExemplar(idExemplar, "Emprestimo");
             diminuirNumeroDeExemplares(isbn);
+            return true;
         } catch (Exception e){
             System.out.println("Erro ao fazer emprestimo. " + e.getMessage());
-        }
-        
+            return false;
+        }      
         
     }
     
@@ -130,7 +131,7 @@ public class EmprestimoDAO {
         }
     }
     
-    public void fazerDevolucao(Usuario user, int idExemplar){
+    public boolean fazerDevolucao(Usuario user, int idExemplar){
         int idEmprestimo = this.procuraEmprestimo(idExemplar);
         
         int isbn = encontraIsbn(idExemplar);
@@ -145,8 +146,10 @@ public class EmprestimoDAO {
             
             this.mudaEstadoExemplar(idExemplar, "Devolucao");
             aumentarNumeroDeExemplares(isbn);
+            return true;
         } catch (Exception e){
             System.out.println("Não foi possível fazer a devolução. "+e.getMessage());
+            return false;
         }
     }
     

@@ -2,6 +2,7 @@
 import beans.Usuario;
 import dao.EmprestimoDAO;
 import dao.UsuarioDAO;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -113,7 +114,21 @@ public class TelaDevolucao extends javax.swing.JFrame {
         Usuario user = usuarioDAO.procuraUsuario(idUsuario);
         
         EmprestimoDAO empDAO = new EmprestimoDAO();
-        empDAO.fazerDevolucao(user, idExemplar);
+        
+        
+        if(txtIdExemplar.equals("") || txtIdentificacao.equals("")){
+            boolean foiDevolvido = empDAO.fazerDevolucao(user, idExemplar);
+                if(foiDevolvido){
+                    JOptionPane.showMessageDialog(this, "Devolução feito com sucesso.");
+                    txtIdExemplar.setText("");
+                    txtIdentificacao.setText("");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Devolução mal sucedida. Revise os dados");           
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Existem campos em branco. Revise os dados");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
