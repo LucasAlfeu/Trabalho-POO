@@ -42,7 +42,7 @@ public class InicioUsuario extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
@@ -77,7 +77,12 @@ public class InicioUsuario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton3.setText("Sair");
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Menu");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +126,7 @@ public class InicioUsuario extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jButton4)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnSair)
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(207, Short.MAX_VALUE)
@@ -140,7 +145,7 @@ public class InicioUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(btnSair)
                     .addComponent(jButton4)
                     .addComponent(jLabel2)
                     .addComponent(jlNome)
@@ -174,9 +179,27 @@ public class InicioUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSugestaoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        MenuBibliotecario menu = new MenuBibliotecario();
-        menu.setVisible(true);
+        if(tipoUsuario.equals("Administrador") || tipoUsuario.equals("Bibliotecário")){
+            MenuBibliotecario menu = new MenuBibliotecario();
+            menu.setVisible(true);
+        } else {
+            MenuAP menuAP = new MenuAP();
+            menuAP.setVisible(true);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        System.clearProperty("nome");
+        System.clearProperty("email");
+        System.clearProperty("login");
+        System.clearProperty("senha");
+        System.clearProperty("matricula");
+        System.clearProperty("tipoUsuario");
+        
+        Inicio ini = new Inicio();
+        ini.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,10 +237,10 @@ public class InicioUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSugestao;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
