@@ -65,6 +65,7 @@ public class ExemplarDAO {
                 Livro livroAutor = new Livro();
                 livroAutor.setAutor(rs.getString("autor"));
                 exemplar.setAutor(livroAutor);
+                exemplar.setEstado(rs.getString("estado"));
                 Livro livroId = new Livro();
                 livroId.setId(rs.getInt("isbn"));
                 exemplar.setIsbn(livroId);
