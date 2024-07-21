@@ -28,6 +28,7 @@ public class MenuAP extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnAtualiarDados = new javax.swing.JButton();
+        btnExemplares = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -38,6 +39,14 @@ public class MenuAP extends javax.swing.JFrame {
         btnAtualiarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualiarDadosActionPerformed(evt);
+            }
+        });
+
+        btnExemplares.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnExemplares.setText("Procurar Exemplar");
+        btnExemplares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExemplaresActionPerformed(evt);
             }
         });
 
@@ -52,7 +61,9 @@ public class MenuAP extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(btnAtualiarDados)))
+                        .addComponent(btnAtualiarDados)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExemplares)))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -61,7 +72,9 @@ public class MenuAP extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAtualiarDados)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAtualiarDados)
+                    .addComponent(btnExemplares))
                 .addContainerGap(233, Short.MAX_VALUE))
         );
 
@@ -74,6 +87,12 @@ public class MenuAP extends javax.swing.JFrame {
         aD.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAtualiarDadosActionPerformed
+
+    private void btnExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExemplaresActionPerformed
+        ListaExemplares le = new ListaExemplares();
+        le.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExemplaresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,6 +131,7 @@ public class MenuAP extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualiarDados;
+    private javax.swing.JButton btnExemplares;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
