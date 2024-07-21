@@ -18,7 +18,43 @@ import java.util.List;
 public class Emprestimo {
     private int idEmprestimo;
     private LocalDate dataEmprestimo;
+    private String dataEmprestimoAux;
     private LocalDate dataDevolucao;
+    private String dataDevolucaoAux;
+    private String matricula;
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getDataEmprestimoAux() {
+        return dataEmprestimoAux;
+    }
+
+    public void setDataEmprestimoAux(String dataEmprestimoAux) {
+        this.dataEmprestimoAux = dataEmprestimoAux;
+    }
+
+    public String getDataDevolucaoAux() {
+        return dataDevolucaoAux;
+    }
+
+    public void setDataDevolucaoAux(String dataDevolucaoAux) {
+        this.dataDevolucaoAux = dataDevolucaoAux;
+    }
     private List<Exemplar> lista = new ArrayList<>();
     private Exemplar idExemplar;
     private Usuario idUsuario;
