@@ -6,12 +6,16 @@ package dao;
 
 import beans.Emprestimo;
 import beans.Exemplar;
+import beans.Livro;
 import beans.Usuario;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import dao.ExemplarDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -99,5 +103,74 @@ public class EmprestimoDAO {
         }
     }
     
+    private String retornaTitulo(int idExemplar){
+        String sql = "SELECT titulo FROM livros WHERE id = ?";
+        int isbn = this.metodosExemplarDAO.encontraIsbn(idExemplar);
+        String titulo = "";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setInt(1, isbn);
+            
+             ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                titulo = rs.getString("titulo");
+            }
+            return titulo;
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return titulo;
+        }
+    }
     
+    public List<Emprestimo> getEmprestimos(){
+        String sql = "SELECT * FROM emprestimo";
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            List<Emprestimo> listaEmprestimos = new ArrayList<>();
+            while (rs.next()){
+                Emprestimo emp = new Emprestimo();
+                
+                Exemplar exemplarId = new Exemplar();
+                exemplarId.setIdexemplares(rs.getInt("idexemplar"));
+                emp.setIdExemplar(exemplarId);
+                emp.setMatricula(rs.getString("matricula"));
+                emp.setEstado(rs.getString("estado"));
+                emp.setDataEmprestimoAux(rs.getString("dataEmprestimo"));
+                emp.setDataDevolucaoAux(rs.getString("dataDevolucao"));
+                listaEmprestimos.add(emp);
+            }
+            return listaEmprestimos;
+        }
+        catch (SQLException e){
+            System.out.println("Erro ao listar exemplares: "+e.getMessage());
+            return null;
+        }
+    }
+    public List<Emprestimo> getEmprestimos(String matricula){
+        String sql = "SELECT * FROM emprestimo WHERE matricula = ?";
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, matricula);
+            ResultSet rs = stmt.executeQuery();
+            List<Emprestimo> listaEmprestimos = new ArrayList<>();
+            while (rs.next()){
+                Emprestimo emp = new Emprestimo();
+                
+                Exemplar exemplarId = new Exemplar();
+                exemplarId.setIdexemplares(rs.getInt("idexemplar"));
+                emp.setIdExemplar(exemplarId);
+                emp.setMatricula(rs.getString("matricula"));
+                emp.setEstado(rs.getString("estado"));
+                emp.setDataEmprestimoAux(rs.getString("dataEmprestimo"));
+                emp.setDataDevolucaoAux(rs.getString("dataDevolucao"));
+                listaEmprestimos.add(emp);
+            }
+            return listaEmprestimos;
+        }
+        catch (SQLException e){
+            System.out.println("Erro ao listar exemplares: "+e.getMessage());
+            return null;
+        }
+    }
 }
