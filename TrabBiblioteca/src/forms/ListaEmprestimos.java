@@ -9,6 +9,7 @@ import beans.Emprestimo;
 import beans.Exemplar;
 import dao.EmprestimoDAO;
 import dao.ExemplarDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,8 +21,13 @@ public class ListaEmprestimos extends javax.swing.JFrame {
 
         private void listarExemplares(){
         EmprestimoDAO empDAO = new EmprestimoDAO();
+        List<Emprestimo> listaEmprestimos = new ArrayList<>();
         
-        List<Emprestimo> listaEmprestimos = empDAO.getEmprestimos();
+        if(System.getProperty("tipoUsuario").equals("Administrador") || System.getProperty("tipoUsuario").equals("Bibliotecário")){
+            listaEmprestimos = empDAO.getEmprestimos();
+        } else {
+            listaEmprestimos = empDAO.getEmprestimos(System.getProperty("matricula"));
+        }
         
         DefaultTableModel tabelaExemplares = (DefaultTableModel) tblEmprestimos.getModel();
         tabelaExemplares.setNumRows(0);

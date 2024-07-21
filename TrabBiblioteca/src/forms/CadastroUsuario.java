@@ -36,11 +36,8 @@ public class CadastroUsuario extends javax.swing.JFrame {
         txtSenha.setText("");
         txtConfirmaSenha.setText("");
         
-        Login lg = new Login();
-        lg.setVisible(true);
-        this.setVisible(false);
-        
         JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso");
+        this.setVisible(false);
     }
 
     /**

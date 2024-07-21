@@ -29,6 +29,7 @@ public class MenuAP extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnAtualiarDados = new javax.swing.JButton();
         btnExemplares = new javax.swing.JButton();
+        btnEmprestimos = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -50,6 +51,13 @@ public class MenuAP extends javax.swing.JFrame {
             }
         });
 
+        btnEmprestimos.setText("Meus Emprestimos");
+        btnEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmprestimosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,9 +69,12 @@ public class MenuAP extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(btnAtualiarDados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnExemplares)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEmprestimos)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAtualiarDados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnExemplares)))))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -75,7 +86,9 @@ public class MenuAP extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtualiarDados)
                     .addComponent(btnExemplares))
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEmprestimos)
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,6 +106,12 @@ public class MenuAP extends javax.swing.JFrame {
         le.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnExemplaresActionPerformed
+
+    private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
+        ListaEmprestimos le = new ListaEmprestimos();
+        le.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +150,7 @@ public class MenuAP extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualiarDados;
+    private javax.swing.JToggleButton btnEmprestimos;
     private javax.swing.JButton btnExemplares;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

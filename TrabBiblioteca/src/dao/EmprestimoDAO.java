@@ -147,4 +147,30 @@ public class EmprestimoDAO {
             return null;
         }
     }
+    public List<Emprestimo> getEmprestimos(String matricula){
+        String sql = "SELECT * FROM emprestimo WHERE matricula = ?";
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, matricula);
+            ResultSet rs = stmt.executeQuery();
+            List<Emprestimo> listaEmprestimos = new ArrayList<>();
+            while (rs.next()){
+                Emprestimo emp = new Emprestimo();
+                
+                Exemplar exemplarId = new Exemplar();
+                exemplarId.setIdexemplares(rs.getInt("idexemplar"));
+                emp.setIdExemplar(exemplarId);
+                emp.setMatricula(rs.getString("matricula"));
+                emp.setEstado(rs.getString("estado"));
+                emp.setDataEmprestimoAux(rs.getString("dataEmprestimo"));
+                emp.setDataDevolucaoAux(rs.getString("dataDevolucao"));
+                listaEmprestimos.add(emp);
+            }
+            return listaEmprestimos;
+        }
+        catch (SQLException e){
+            System.out.println("Erro ao listar exemplares: "+e.getMessage());
+            return null;
+        }
+    }
 }
