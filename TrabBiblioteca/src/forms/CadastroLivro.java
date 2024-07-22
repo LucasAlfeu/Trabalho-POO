@@ -9,6 +9,7 @@ import beans.Livro;
 import dao.ExemplarDAO;
 import dao.LivroDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -184,11 +185,17 @@ public class CadastroLivro extends javax.swing.JFrame {
         int anoLancamento = Integer.parseInt(jsAnoLancamento.getValue().toString());
         int numeroExemplares = Integer.parseInt(jsNumExemplares.getValue().toString());
         
-        
-        
-        Livro livro = new Livro(titulo, autor, editora, categoria, anoLancamento, numeroExemplares);
-        LivroDAO livroDAO = new LivroDAO();
-        livroDAO.cadastrarLivro(livro);
+        if(titulo.equals("") || autor.equals("") || editora.equals("")){
+            JOptionPane.showMessageDialog(this, "Existem campos vazios");
+        }
+        else if(anoLancamento == 0 || numeroExemplares == 0){
+            JOptionPane.showMessageDialog(this, "Existem campos vazios");
+        }
+        else{
+            Livro livro = new Livro(titulo, autor, editora, categoria, anoLancamento, numeroExemplares);
+            LivroDAO livroDAO = new LivroDAO();
+            livroDAO.cadastrarLivro(livro);
+        }
         
         txtTitulo.setText("");
         txtAutor.setText("");
