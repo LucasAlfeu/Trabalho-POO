@@ -185,7 +185,7 @@ public class CadastroLivro extends javax.swing.JFrame {
         int anoLancamento = Integer.parseInt(jsAnoLancamento.getValue().toString());
         int numeroExemplares = Integer.parseInt(jsNumExemplares.getValue().toString());
         
-        if(titulo.equals("") || autor.equals("") || editora.equals("")){
+        if(titulo.equals("") || autor.equals("") || editora.equals("") || categoria.equals("")){
             JOptionPane.showMessageDialog(this, "Existem campos vazios");
         }
         else if(anoLancamento == 0 || numeroExemplares == 0){

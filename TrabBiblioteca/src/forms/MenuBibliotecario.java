@@ -38,6 +38,7 @@ public class MenuBibliotecario extends javax.swing.JFrame {
         btnListaEmprestimo = new javax.swing.JButton();
         btnExluirLivro = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        btnCadastrarExemplares = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -106,6 +107,13 @@ public class MenuBibliotecario extends javax.swing.JFrame {
 
         btnExluirLivro.setText("Excluir Livro");
 
+        btnCadastrarExemplares.setText("Cadastrar Exemplares");
+        btnCadastrarExemplares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarExemplaresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +123,10 @@ public class MenuBibliotecario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnExluirLivro)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnExluirLivro)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCadastrarExemplares))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnListaExemplares)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,7 +173,9 @@ public class MenuBibliotecario extends javax.swing.JFrame {
                     .addComponent(btnListaExemplares)
                     .addComponent(btnListaEmprestimo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExluirLivro)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExluirLivro)
+                    .addComponent(btnCadastrarExemplares))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
 
@@ -219,6 +232,13 @@ public class MenuBibliotecario extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnListaEmprestimoActionPerformed
 
+    private void btnCadastrarExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarExemplaresActionPerformed
+        // TODO add your handling code here:
+        CadastroExemplar le = new CadastroExemplar();
+        le.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCadastrarExemplaresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -256,6 +276,7 @@ public class MenuBibliotecario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizarDados;
+    private javax.swing.JButton btnCadastrarExemplares;
     private javax.swing.JButton btnCadastrarUsuario;
     private javax.swing.JButton btnCadstrarLivro;
     private javax.swing.JButton btnDeletarUsuario;
