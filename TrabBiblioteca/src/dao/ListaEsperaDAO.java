@@ -44,13 +44,14 @@ public class ListaEsperaDAO {
         String sql = "SELECT * FROM listaespera WHERE titulo LIKE ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, titulo+"%");
             ResultSet rs = stmt.executeQuery();
             List<Espera> listaLivroEspera = new ArrayList<>();
             while(rs.next()){
                 Espera e = new Espera();
-                e.setTitulo(rs.getString("listaEspera"));
+                e.setTitulo(rs.getString("titulo"));
                 e.setIsbn(rs.getInt("isbn"));
-                e.setUsuario(rs.getInt("Usuario"));
+                e.setUsuario(rs.getInt("idUsuario"));
                 listaLivroEspera.add(e);
             }
             return listaLivroEspera;
