@@ -16,21 +16,14 @@ import java.util.List;
  */
 public class CadastroLivro extends javax.swing.JFrame {
     
-    public void preencherComboLivros(){
-        LivroDAO livroDAO = new LivroDAO();
-        List<Livro> lista = livroDAO.getLivros("");
-        
-        for(Livro l:lista){
-            cmbLivros.addItem(l);
-        }
-    }
+    
 
     /**
      * Creates new form CadastroLivro
      */
     public CadastroLivro() {
         initComponents();
-        preencherComboLivros();
+        
     }
 
     /**
@@ -58,9 +51,6 @@ public class CadastroLivro extends javax.swing.JFrame {
         jsAnoLancamento = new javax.swing.JSpinner();
         jsNumExemplares = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
-        btnCadastrarExemplares = new javax.swing.JButton();
-        cmbLivros = new javax.swing.JComboBox();
-        jLabel8 = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
@@ -102,30 +92,12 @@ public class CadastroLivro extends javax.swing.JFrame {
             }
         });
 
-        btnCadastrarExemplares.setText("Cadastrar Exemplares");
-        btnCadastrarExemplares.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarExemplaresActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("Exemplares:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnCadastrarExemplares)
-                        .addGap(13, 13, 13))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -145,7 +117,6 @@ public class CadastroLivro extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addGap(29, 29, 29)
                                 .addComponent(txtCategoria))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,10 +125,14 @@ public class CadastroLivro extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jsAnoLancamento)
                                     .addComponent(jsNumExemplares)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
-                                .addComponent(cmbLivros, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCadastrar)))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -189,15 +164,10 @@ public class CadastroLivro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jsNumExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbLivros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(35, 35, 35)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
-                    .addComponent(jButton1)
-                    .addComponent(btnCadastrarExemplares))
+                    .addComponent(jButton1))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -233,18 +203,6 @@ public class CadastroLivro extends javax.swing.JFrame {
         AtualizarLivro frc = new AtualizarLivro();
         frc.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnCadastrarExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarExemplaresActionPerformed
-        Livro livroid = (Livro) cmbLivros.getSelectedItem();
-        
-        Exemplar exemplar = new Exemplar(livroid,livroid,"Disponível",livroid);
-        ExemplarDAO exemplarDAO = new ExemplarDAO();
-        exemplarDAO.cadastrarExemplar(livroid, exemplar);
-        
-        txtTitulo.setText("");
-        txtAutor.setText("");
-        
-    }//GEN-LAST:event_btnCadastrarExemplaresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,8 +241,6 @@ public class CadastroLivro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnCadastrarExemplares;
-    private javax.swing.JComboBox cmbLivros;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -294,7 +250,6 @@ public class CadastroLivro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JSpinner jsAnoLancamento;
     private javax.swing.JSpinner jsNumExemplares;
     private javax.swing.JTextField txtAutor;
