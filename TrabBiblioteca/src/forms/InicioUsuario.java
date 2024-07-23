@@ -4,13 +4,38 @@
  */
 package forms;
 
+import beans.Livro;
+import dao.LivroDAO;
 import forms.AdicionarSugestao;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author a1feu
  */
 public class InicioUsuario extends javax.swing.JFrame {
+    
+    private void preencheTabela(){
+        LivroDAO livroDAO = new LivroDAO();
+        String busca = jTextField1.getText();
+        List<Livro> listaLivros = livroDAO.getLivros(busca);
+        
+        DefaultTableModel tabelaLivros = (DefaultTableModel) tblLivros.getModel();
+        
+        tabelaLivros.setNumRows(0);
+        
+        for (Livro l: listaLivros){
+            Object[] obj = new Object[]{
+                l.getId(),
+                l.getTitulo(),
+                l.getAutor(),
+                l.getNumeroExemplares(),
+            };
+            tabelaLivros.addRow(obj);
+        }
+        
+    }
     String nome = System.getProperty("nome");
     String email = System.getProperty("email");
     String login = System.getProperty("login");
@@ -23,6 +48,7 @@ public class InicioUsuario extends javax.swing.JFrame {
      */
     public InicioUsuario() {
         initComponents();
+        preencheTabela();
         jlNome.setText(nome);
         jlTipoUsuario.setText(tipoUsuario);
     }
@@ -39,14 +65,14 @@ public class InicioUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
         jlTipoUsuario = new javax.swing.JLabel();
         btnSugestao = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblLivros = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Gerenciador da Biblioteca");
@@ -63,16 +89,6 @@ public class InicioUsuario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Titulo", "Autor", "Numero de exemplares", "Disponivel"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +117,16 @@ public class InicioUsuario extends javax.swing.JFrame {
             }
         });
 
+        tblLivros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Titulo", "Autor", "Numero de Exemplares"
+            }
+        ));
+        jScrollPane2.setViewportView(tblLivros);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,19 +146,20 @@ public class InicioUsuario extends javax.swing.JFrame {
                 .addComponent(btnSair)
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(207, Short.MAX_VALUE)
+                .addContainerGap(182, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(177, 177, 177))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(354, 354, 354))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(423, 423, 423))))
+                        .addGap(423, 423, 423))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(177, 177, 177))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,9 +179,9 @@ public class InicioUsuario extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,6 +190,7 @@ public class InicioUsuario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        preencheTabela();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSugestaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSugestaoActionPerformed
@@ -235,10 +263,10 @@ public class InicioUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlTipoUsuario;
+    private javax.swing.JTable tblLivros;
     // End of variables declaration//GEN-END:variables
 }

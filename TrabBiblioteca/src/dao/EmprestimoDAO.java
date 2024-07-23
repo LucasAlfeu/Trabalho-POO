@@ -24,8 +24,7 @@ import java.util.List;
 public class EmprestimoDAO {
     private Conexao conexao;
     private Connection conn;
-    private ExemplarDAO metodosExemplarDAO;
-    private LivroDAO metodosLivroDAO;
+    
     
     public EmprestimoDAO(){
         this.conexao = new Conexao();
@@ -40,7 +39,7 @@ public class EmprestimoDAO {
         String sql = "INSERT INTO emprestimo(matricula, dataEmprestimo, dataDevolucao, estado, idUsuario, idExemplar) values (?,?,?,?,?,?)";
         Exemplar exemplar = new Exemplar();
         Emprestimo emp = new Emprestimo();
-        int isbn = metodosExemplarDAO.encontraIsbn(idExemplar);
+        
         
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -53,8 +52,7 @@ public class EmprestimoDAO {
             
             stmt.execute();
             
-            this.metodosExemplarDAO.mudaEstadoExemplar(idExemplar, "Emprestimo");
-            this.metodosLivroDAO.diminuirNumeroDeExemplares(isbn);
+            
             return true;
         } catch (Exception e){
             System.out.println("Erro ao fazer emprestimo. " + e.getMessage());
@@ -84,7 +82,7 @@ public class EmprestimoDAO {
     public boolean fazerDevolucao(Usuario user, int idExemplar){
         int idEmprestimo = this.procuraEmprestimo(idExemplar);
         
-        int isbn = this.metodosExemplarDAO.encontraIsbn(idExemplar);
+        
         
         String sql = "UPDATE emprestimo SET estado = ? WHERE idemprestimo = ? AND matricula = ?";
         try{
@@ -94,8 +92,7 @@ public class EmprestimoDAO {
             stmt.setString(3, user.getMatricula());
             stmt.execute();
             
-            this.metodosExemplarDAO.mudaEstadoExemplar(idExemplar, "Devolucao");
-            this.metodosLivroDAO.aumentarNumeroDeExemplares(isbn);
+            
             return true;
         } catch (Exception e){
             System.out.println("Não foi possível fazer a devolução. "+e.getMessage());
@@ -103,24 +100,7 @@ public class EmprestimoDAO {
         }
     }
     
-    private String retornaTitulo(int idExemplar){
-        String sql = "SELECT titulo FROM livros WHERE id = ?";
-        int isbn = this.metodosExemplarDAO.encontraIsbn(idExemplar);
-        String titulo = "";
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement(sql);
-            stmt.setInt(1, isbn);
-            
-             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                titulo = rs.getString("titulo");
-            }
-            return titulo;
-        } catch(Exception e){
-            System.out.println(e.getMessage());
-            return titulo;
-        }
-    }
+    
     
     public List<Emprestimo> getEmprestimos(){
         String sql = "SELECT * FROM emprestimo";

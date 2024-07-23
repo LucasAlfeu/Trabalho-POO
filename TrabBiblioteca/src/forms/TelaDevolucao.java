@@ -118,7 +118,7 @@ public class TelaDevolucao extends javax.swing.JFrame {
         EmprestimoDAO empDAO = new EmprestimoDAO();
         
         
-        if(txtIdExemplar.equals("") || txtIdentificacao.equals("")){
+        if(!txtIdExemplar.equals("") && !txtIdentificacao.equals("")){
             boolean foiDevolvido = empDAO.fazerDevolucao(user, idExemplar);
                 if(foiDevolvido){
                     JOptionPane.showMessageDialog(this, "Devolução feito com sucesso.");
