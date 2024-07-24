@@ -106,6 +106,11 @@ public class MenuBibliotecario extends javax.swing.JFrame {
         });
 
         btnExluirLivro.setText("Excluir Livro");
+        btnExluirLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExluirLivroActionPerformed(evt);
+            }
+        });
 
         btnCadastrarExemplares.setText("Cadastrar Exemplares");
         btnCadastrarExemplares.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +243,12 @@ public class MenuBibliotecario extends javax.swing.JFrame {
         le.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarExemplaresActionPerformed
+
+    private void btnExluirLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExluirLivroActionPerformed
+        ExcluirLivro el = new ExcluirLivro();
+        el.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnExluirLivroActionPerformed
 
     /**
      * @param args the command line arguments

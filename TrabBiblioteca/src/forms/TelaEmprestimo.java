@@ -123,7 +123,7 @@ public class TelaEmprestimo extends javax.swing.JFrame {
         EmprestimoDAO empDAO = new EmprestimoDAO();
         
         if(!txtIdExemplar.equals("") && !txtIdentificacao.equals("")){
-            boolean foiEmprestado = empDAO.fazerDevolucao(user, idExemplar);
+            boolean foiEmprestado = empDAO.fazerEmprestimo(user, idExemplar);
                 if(foiEmprestado){
                     JOptionPane.showMessageDialog(this, "Empréstimo feito com sucesso.");
                     txtIdExemplar.setText("");

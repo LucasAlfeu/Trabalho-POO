@@ -38,8 +38,7 @@ public class EmprestimoDAO {
     public boolean fazerEmprestimo(Usuario user, int idExemplar){
         String sql = "INSERT INTO emprestimo(matricula, dataEmprestimo, dataDevolucao, estado, idUsuario, idExemplar) values (?,?,?,?,?,?)";
         Exemplar exemplar = new Exemplar();
-        Emprestimo emp = new Emprestimo();
-        
+        Emprestimo emp = new Emprestimo();      
         
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -50,9 +49,7 @@ public class EmprestimoDAO {
             stmt.setInt(5, user.getIdUsuario());
             stmt.setInt(6, idExemplar);
             
-            stmt.execute();
-            
-            
+            stmt.execute();         
             return true;
         } catch (Exception e){
             System.out.println("Erro ao fazer emprestimo. " + e.getMessage());
